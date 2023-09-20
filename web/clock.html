@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .clock {
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            text-align: center;
+        }
+        .clock h2 {
+            font-size: 24px;
+        }
+        .clock p {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <h2>New York</h2>
+        <p id="new-york-time"></p>
+    </div>
+
+    <div class="clock">
+        <h2>London</h2>
+        <p id="london-time"></p>
+    </div>
+
+    <div class="clock">
+        <h2>Tokyo</h2>
+        <p id="tokyo-time"></p>
+    </div>
+
+    <script>
+        function updateClock(city, offset) {
+            const now = new Date();
+            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            const localTime = new Date(utc + (3600000 * offset));
+            const timeString = localTime.toLocaleTimeString();
+
+            document.getElementById(city + '-time').textContent = timeString;
+        }
+
+        setInterval(() => {
+            updateClock('new-york', -5);
+            updateClock('london', 0);
+            updateClock('tokyo', 9);
+        }, 1000);
+    </script>
+</body>
+</html>
